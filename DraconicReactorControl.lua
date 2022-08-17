@@ -4,8 +4,16 @@ local tty       = require("tty")
 tty.clear()
 
 -- Wrap Reactor Components -------------------------------------------------------------------------
+if not component.draconic_reactor then
+  print("Draconic reactor not found. Either your setup is invalid, or you have bigger problems on your hands.")
+  os.exit()
+end
 local reactor = component.draconic_reactor
 
+if not component.flux_gate then
+  print("No flux gates connected; please connect inflow and outflow flux gates with Adapter blocks.")
+  os.exit()
+end
 local flux_gates = {}
 for address, _ in pairs(component.list("flux_gate")) do
   flux_gates[#flux_gates+1] = address
@@ -16,20 +24,19 @@ if #flux_gates < 2 then
 end
 local inputFlux = component.proxy(flux_gates[1])
 local outputFlux = component.proxy(flux_gates[2])
-outputFlux.setOverrideEnabled(true)
 inputFlux.setOverrideEnabled(true)
+outputFlux.setOverrideEnabled(true)
 
 -- Control Variables--------------------------------------------------------------------------------
 local tArgs = {...}
 local targetTemp = tonumber(tArgs[1]) or 8000  -- Desired temperature
-local targetShieldPercent = tonumber(tArgs[2]) or 0.15 -- Desired shield strength
+local targetField = tonumber(tArgs[2]) or 0.15 -- Desired shield strength
 local swapFlux = tonumber(tArgs[3]) or 1 -- Swap input and output flux gates
 local reactorOutputMultiplier = tonumber(tArgs[4]) or 1 -- Reactor output multiplier (mod cfg)
 local helpVar = tonumber(tArgs[5]) or 0 -- Help Command = 1
-local targetShield = (targetShieldPercent / 100)
 
 if targetTemp < 2500 then targetTemp = 2500 elseif targetTemp > 15000 then targetTemp = 15000 end
-if targetShield < 0.00001 then targetShield = 0.00001 elseif targetShield > 1 then targetShield = 1 end
+if targetField < 0.00001 then targetField = 0.00001 elseif targetField > 1 then targetField = 1 end
 if swapFlux < 1 then swapFlux = 1 elseif swapFlux > 2 then swapFlux = 2 end
 
 -- Swap Flux Gates----------------------------------------------------------------------------------
@@ -101,10 +108,10 @@ local function update()
     local baseMaxRFt = (reactorInfo.maxEnergySaturation / 1000) * reactorOutputMultiplier * 1.5
     local fieldDrain = math.min(tempDrainFactor * math.max(0.01, (1-coreSat)) * (baseMaxRFt / 10.923556), 2147000000)
           print(string.format("Current field drain is %d RF/t", reactorInfo.fieldDrainRate))
-    local fieldNegPercent = 1 - targetShield
+    local fieldNegPercent = 1 - targetField
           print(string.format("fieldNegPercent is %d", fieldNegPercent))
     --local fieldInputRate = fieldDrain / fieldNegPercent
-    local fieldStrengthError = (reactorInfo.maxFieldStrength * targetShield) - reactorInfo.fieldStrength
+    local fieldStrengthError = (reactorInfo.maxFieldStrength * targetField) - reactorInfo.fieldStrength
           print(string.format("Error between current field strength and target strength: %d", fieldStrengthError))
     local requiredInput = math.min((reactorInfo.maxFieldStrength * reactorInfo.fieldDrainRate) / (reactorInfo.maxFieldStrength - reactorInfo.fieldStrength), reactorInfo.maxFieldStrength - reactorInfo.fieldStrength)
           print(string.format("Required input to counter field drain: %d RF/t\n", requiredInput))
