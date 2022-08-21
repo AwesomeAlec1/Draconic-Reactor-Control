@@ -227,21 +227,30 @@ local function runReactor()
     -- Calculate field input
     local fieldNegPercent = 1 - targetField
     local fieldStrengthError = (reactorInfo.maxFieldStrength * targetField) - reactorInfo.fieldStrength
-    local requiredInput = math.min((reactorInfo.maxFieldStrength * reactorInfo.fieldDrainRate) / (reactorInfo.maxFieldStrength - reactorInfo.fieldStrength), reactorInfo.maxFieldStrength - reactorInfo.fieldStrength)
+    local requiredInput = math.min(fieldStrengthError + (reactorInfo.maxFieldStrength * reactorInfo.fieldDrainRate) / (reactorInfo.maxFieldStrength - reactorInfo.fieldStrength) - reactorInfo.fieldDrainRate + 1,
+                            reactorInfo.maxFieldStrength - reactorInfo.fieldStrength)
 
     if reactorInfo.status == "warming_up" then
-      setReactorOutput(0)
-      setReactorInput(5000000)
+      if reactorInfo.fuelConversion / reactorInfo.maxFuelConversion > targetFuel then
+        reactor.stopReactor()
+      else
+        if reactorInfo.temperature >= 2000 then
+          reactor.activateReactor()
+        else
+          setReactorOutput(0)
+          setReactorInput(5000000)
+        end
+      end
     elseif reactorInfo.status == "running" then
       if reactorInfo.fuelConversion / reactorInfo.maxFuelConversion > targetFuel then
         reactor.stopReactor()
       end
 
       setReactorOutput(requiredOutput)
-      setReactorInput(math.min(fieldStrengthError + requiredInput, reactorInfo.maxFieldStrength) - reactorInfo.fieldDrainRate + 1)
+      setReactorInput(requiredInput)
     elseif reactorInfo.status == "stopping" then
       setReactorOutput(0)
-      setReactorInput(math.min(fieldStrengthError + requiredInput, reactorInfo.maxFieldStrength) - reactorInfo.fieldDrainRate + 1)
+      setReactorInput(requiredInput)
     end
 		
 		--print("runReactor okay")
