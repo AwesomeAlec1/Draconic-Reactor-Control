@@ -222,7 +222,7 @@ local function runReactor()
  
     -- Calculate the difference between where saturation is and where it needs to be
     local saturationError = reactorInfo.energySaturation - targetSat
-    local requiredOutput = math.min(saturationError, reactorInfo.maxEnergySaturation / 40) + reactorInfo.generationRate
+    local requiredOutput = math.min(saturationError, reactorInfo.maxEnergySaturation / 40) --+ reactorInfo.generationRate
 
     -- Calculate field input
     local fieldNegPercent = 1 - targetField
@@ -490,32 +490,32 @@ local function drawUI()
 			local left_margin = 2
 			local spacing = 1
 			local values = {
-				string.format("      Estimated time to refuel: %2dd, %2dh, %2dm, %2ds", secondsToExpire/86400, secondsToExpire/3600 % 24, secondsToExpire/60 % 60, secondsToExpire % 60),
 							        "",
-                      "                  Reactor Statistics",
-							        "┌─────────────────────┬─────────────────────────────┐",
-				string.format("│ Ideal Field:        │       %5.1f%%                │", targetField * 100),
-				string.format("│ Current Field:      │       %5.1f%% (%4.1fRF)    │", ((reactorInfo.fieldStrength / reactorInfo.maxFieldStrength) * 100), ((reactorInfo.fieldStrength / reactorInfo.maxFieldStrength) * 100000000)),
-							        "├─────────────────────┼─────────────────────────────┤",
-				string.format("│ Fuel Remaining:     │                   %5.1f%%    │", ((1 - reactorInfo.fuelConversion / reactorInfo.maxFuelConversion) * 100)),
-				string.format("│ Fuel Use Rate:      │ %10.1f nb/t (%4.2f I/s)  │", reactorInfo.fuelConversionRate, ((reactorInfo.fuelConversionRate / 50000) / 144)),
-							        "├─────────────────────┼─────────────────────────────┤",
-				string.format("│ Temperature:        │       %7.1f°c (%7.1f°f) │", reactorInfo.temperature, ((reactorInfo.temperature * 1.8) + 32)),
-				string.format("│ Target Temperature: │       %7.1f°c (%7.1f°f) │", targetTemp, ((targetTemp * 1.8) + 32)),
-							        "├─────────────────────┼─────────────────────────────┤",
-				string.format("│ Energy Input:       │       %12.1f RF/t     │", getReactorInput()),
-				string.format("│ Energy Output:      │       %12.1f RF/t     │", getReactorOutput()),
-				string.format("│ Energy Efficiency:  │       %12.1f RF/t     │", ((getReactorOutput() / getReactorInput()) * 100)),
-				string.format("│ Energy Profit:      │       %12.1f RF/t     │", (getReactorOutput() - getReactorInput())),
-							        "└─────────────────────┴─────────────────────────────┘",
-							        "                                                         ",
-							        "                    Debug Information                    ",
-							        "┌───────────────────────┬───────────────────────────┐",
-				string.format("│ Max Field Drop:       │                     %5.2f │", lowestField),
-				string.format("│ Lowest Recorded Fuel: │                  %8.2f │", lowestFuel),
-				string.format("│ Max Temp Spike:       │                  %8.2f │", highestTemp),
-				string.format("│ Status:               │               %11s │", reactorInfo.status),
-							        "└───────────────────────┴───────────────────────────┘",
+                      "                    Reactor Stats",
+							        "┌─────────────────────────┬─────────────────────────┐",
+				string.format("│ Field Strength:         │                  %5.1f%% │", ((reactorInfo.fieldStrength / reactorInfo.maxFieldStrength) * 100), ((reactorInfo.fieldStrength / reactorInfo.maxFieldStrength) * 100000000)),
+        string.format("│ Target:                 │                  %5.1f%% │", targetField * 100),
+                      "├─────────────────────────┼─────────────────────────┤",
+        string.format("│ Fuel Remaining:         │                  %5.1f%% │", ((1 - reactorInfo.fuelConversion / reactorInfo.maxFuelConversion) * 100)),
+				string.format("│ Fuel Use Rate:          │         %10.1f nb/t │", reactorInfo.fuelConversionRate, ((reactorInfo.fuelConversionRate / 50000) / 144)),
+        string.format("│ Time Until Refuel:      │   %5dd, %2dh, %2dm, %2ds │", secondsToExpire/86400, secondsToExpire/3600 % 24, secondsToExpire/60 % 60, secondsToExpire % 60),
+							        "├─────────────────────────┼─────────────────────────┤",
+				string.format("│ Target Temperature:     │   %7.1f°c (%7.1f°f) │", targetTemp, ((targetTemp * 1.8) + 32)),
+        string.format("│ Current Temperature:    │   %7.1f°c (%7.1f°f) │", reactorInfo.temperature, ((reactorInfo.temperature * 1.8) + 32)),
+							        "├─────────────────────────┼─────────────────────────┤",
+				string.format("│ Energy Input:           │   %12.1f RF/t     │", getReactorInput()),
+				string.format("│ Energy Output:          │   %12.1f RF/t     │", getReactorOutput()),
+				string.format("│ Energy Efficiency:      │   %12.1f RF/t     │", ((getReactorOutput() / getReactorInput()) * 100)),
+				string.format("│ Energy Profit:          │   %12.1f RF/t     │", (getReactorOutput() - getReactorInput())),
+							        "└─────────────────────────┴─────────────────────────┘",
+							        "",
+							        "                  Debug Information",
+							        "┌─────────────────────────┬─────────────────────────┐",
+				string.format("│ Max Field Drop:         │                  %6.2f │", lowestField),
+				string.format("│ Lowest Recorded Fuel:   │                %8.2f │", lowestFuel),
+				string.format("│ Max Temp Spike:         │                %8.2f │", highestTemp),
+				string.format("│ Status:                 │             %11s │", reactorInfo.status),
+							        "└─────────────────────────┴─────────────────────────┘",
 			}
 
 			term.clear()
