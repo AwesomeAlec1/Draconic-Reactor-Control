@@ -164,7 +164,7 @@ local function getReactorOutput()
   else
     local outputSum = 0
     for i = 1, #outputFluxGates do
-      outputSum = outputFluxGates[i].getFlow()
+      outputSum = outputSum + outputFluxGates[i].getFlow()
     end
     return outputSum
   end
@@ -525,7 +525,7 @@ local function drawUI()
         string.format("│ Energy Input:           │   %12.1f RF/t     │", getReactorInput()),
         string.format("│ Energy Output:          │   %12.1f RF/t     │", getReactorOutput()),
         string.format("│ Energy Profit:          │   %12.1f RF/t     │", (getReactorOutput() - getReactorInput())),
-        string.format("│ Energy Efficiency:      │   %12.1f %%       │", ((getReactorOutput() / getReactorInput()) * 100)),
+        string.format("│ Energy Efficiency:      │   %12.1f %%        │", ((getReactorOutput() / getReactorInput()) * 100)),
         "└─────────────────────────┴─────────────────────────┘",
         "",
         "                  Debug Information",
@@ -604,7 +604,9 @@ local function parseInput()
     -- Wait for next tick, or manual shutdown
 
     local event, id, op1, op2 = event.pull(0.05)
+    
     if event == "interrupted" then
+
       eventLoop = false
       thread.current():join()
 
@@ -631,14 +633,21 @@ end
 ---------------------------------------------------------------------
 
 local runReactorThread = thread.create(runReactor)
-local drawUIThread = thread.create(drawUI)
+local drawUIThread     = thread.create(drawUI)
 local parseInputThread = thread.create(parseInput)
+
 thread.waitForAny({runReactorThread, drawUIThread, parseInputThread})
+
 --drawUI()
+
 eventLoop = false
+
 reactor.stopReactor()
+
 term.clear()
 term.setCursor(1,1)
+
 local maxX, maxY = gpu.maxResolution()
 gpu.setResolution(maxX,maxY)
+
 print("exited")
