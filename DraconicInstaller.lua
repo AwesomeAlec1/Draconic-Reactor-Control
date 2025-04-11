@@ -22,7 +22,7 @@ os.execute(cls)
 print("Draconic Control Installer")
 print("Please select a version:")
 print("")
-print("stable"
+print("stable")
 print("[Stable Branches]")
 print("")
 print("canary")
