@@ -7,7 +7,7 @@ local screen = component.screen
 --Update
 
 print("Check for update? (y/n)")
-local updateVariable = io.read("*n")
+local updateVariable = io.read()
 if updateVariable == "y" then
 	fileName = process.info().path
 	installPath = shell.resolve(fileName)
@@ -30,7 +30,7 @@ print("[Canary Branches]")
 print("")
 print("legacy")
 print("[Legacy Branches]")
-local pathSelect = io.read("*n")
+local pathSelect = io.read()
 	if pathSelect == "stable" then goto stable
 	elseif pathSelect == "canary" then goto canary
 	elseif pathSelect == "legacy" then goto legacy
@@ -74,7 +74,7 @@ print("Draconic Control 15.2xSMT")
 print("")
 print("2")
 print("Draconic Control rSMT")
-local canarySelect = io.read("*n")
+local canarySelect = io.read()
 	if canarySelect == "1" then Link = "" fileName = "dc15t"
 	elseif canarySelect == "2" then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
 	else goto canary
@@ -97,7 +97,7 @@ print("Draconic Control 9.5b")
 print("")
 print("")
 print("Draconic Control 11.1")
-local legacySelect = io.read("*n")
+local legacySelect = io.read()
 	if legacySelect == "1" then Link = "" fileName = "dcli"
 	elseif legacySelect == "2" then Link = "" fileName = "dc8"
 	elseif legacySelect == "3" then Link = "" fileName = "dc9b"
@@ -113,7 +113,7 @@ goto selectLocation
 os.execute("cls")
 print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
-local DCPath = io.read("*n")
+local DCPath = io.read()
 if DCPath == "" then DCPath = "/home/"
 end
 os.execute("wget", {"-f", Link, DCPath..fileName}) 
