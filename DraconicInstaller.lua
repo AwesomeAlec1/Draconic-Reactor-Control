@@ -43,7 +43,7 @@ local pathSelect = io.read()
 os.execute(cls)
 print("Draconic Control Stable Releases")
 print("")
-print("1"
+print("1")
 print("Draconic Control 13.0")
 print("")
 print("2")
@@ -110,8 +110,9 @@ goto selectLocation
 
 ::selectLocation::
 os.execute(cls)
-print("Please specify a file directory for ", fileName)
+print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
 local DCPath = io.read()
-if DCPath == "" then DCPath = "/home/" end
+if DCPath == "" then DCPath = "/home/"
+end
 os.execute("wget", {"-f", Link, DCPath..fileName})
