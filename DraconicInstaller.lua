@@ -5,6 +5,7 @@ gpu = component.gpu
 screen = component.screen
 
 --Update
+
 print("Check for update? (y/n)")
 local updateVariable = io.read()
 if updateVariable == "y" then
@@ -15,6 +16,7 @@ else goto main
 end
 
 -- Branch Selector Screen (done)
+
 ::main::
 os.execute(cls)
 print("Draconic Control Installer")
@@ -35,7 +37,8 @@ local pathSelect = io.read()
 	else goto main
 	end
 
---Stable versions (done - links)
+--Stable versions (done except links)
+
 ::stable::
 os.execute(cls)
 print("Draconic Control Stable Releases")
@@ -60,7 +63,8 @@ local stableSelect = io.read()
 	end
 goto selectLocation
 
---Canary versions
+--Canary versions (done except links)
+
 ::canary::
 os.execute(cls)
 print("Draconic Control 15.2xSMT")
@@ -71,7 +75,8 @@ local canarySelect = io.read()
 	end
 goto selectLocation
 
---legacy versions (done - links)
+--legacy versions (done except links)
+
 ::legacy::
 os.execute(cls)
 print("Draconic Control Legacy Releases")
@@ -95,7 +100,8 @@ local legacySelect = io.read()
 	end
 goto selectLocation
 
---Actually Installing The Damn Thing
+--Actually Installing The Damn Thing (done)
+
 ::selectLocation::
 os.execute(cls)
 print("Please specify a file directory")
