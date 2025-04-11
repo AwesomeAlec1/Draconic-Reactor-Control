@@ -11,7 +11,7 @@ local updateVariable = tostring(io.read())
 if updateVariable == "y" then
 	local fileName = process.info().path
 	local installPath = shell.resolve(fileName)
---	os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
+	os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
 else goto main
 end
 
@@ -76,7 +76,7 @@ print("2")
 print("Draconic Control rSMT")
 local canarySelect = tonumber(io.read())
 	if canarySelect == 1 then Link = "" fileName = "dc15t"
---	elseif canarySelect == 2 then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
+	elseif canarySelect == 2 then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
 	else goto canary
 	end
 goto selectLocation
@@ -116,4 +116,4 @@ print("Default: /home/")
 local DCPath = tostring(io.read())
 if DCPath == "" then DCPath = "/home/"
 end
---os.execute("wget", {"-f", Link, DCPath..fileName}) 
+os.execute("wget", {"-f", Link, DCPath..fileName}) 
