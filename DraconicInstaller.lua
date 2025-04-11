@@ -7,11 +7,11 @@ local screen = component.screen
 --Update
 
 print("Check for update? (y/n)")
-local updateVariable = io.read()
+local updateVariable = tostring(io.read())
 if updateVariable == "y" then
-	fileName = process.info().path
-	installPath = shell.resolve(fileName)
-	os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
+	local fileName = process.info().path
+	local installPath = shell.resolve(fileName)
+--	os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
 else goto main
 end
 
@@ -30,7 +30,7 @@ print("[Canary Branches]")
 print("")
 print("legacy")
 print("[Legacy Branches]")
-local pathSelect = io.read()
+local pathSelect = tostring(io.read())
 	if pathSelect == "stable" then goto stable
 	elseif pathSelect == "canary" then goto canary
 	elseif pathSelect == "legacy" then goto legacy
@@ -54,11 +54,11 @@ print("Draconic Control 14.0p")
 print("")
 print("4")
 print("Draconic Control 15.1e")
-local stableSelect = io.read("*n")
-	if stableSelect == "1" then Link = "" fileName = "dc13"
-	elseif stableSelect == "2" then Link = "" fileName = "dc14e"
-	elseif stableSelect == "3" then Link = "" fileName = "dc14p"
-	elseif stableSelect == "4" then Link = "" fileName = "dc15e"
+local stableSelect = tonumber(io.read())
+	if stableSelect == 1 then Link = "" fileName = "dc13"
+	elseif stableSelect == 2 then Link = "" fileName = "dc14e"
+	elseif stableSelect == 3 then Link = "" fileName = "dc14p"
+	elseif stableSelect == 4 then Link = "" fileName = "dc15e"
 	else goto stable
 	end
 goto selectLocation
@@ -74,9 +74,9 @@ print("Draconic Control 15.2xSMT")
 print("")
 print("2")
 print("Draconic Control rSMT")
-local canarySelect = io.read()
-	if canarySelect == "1" then Link = "" fileName = "dc15t"
-	elseif canarySelect == "2" then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
+local canarySelect = tonumber(io.read())
+	if canarySelect == 1 then Link = "" fileName = "dc15t"
+--	elseif canarySelect == 2 then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
 	else goto canary
 	end
 goto selectLocation
@@ -97,11 +97,11 @@ print("Draconic Control 9.5b")
 print("")
 print("")
 print("Draconic Control 11.1")
-local legacySelect = io.read()
-	if legacySelect == "1" then Link = "" fileName = "dcli"
-	elseif legacySelect == "2" then Link = "" fileName = "dc8"
-	elseif legacySelect == "3" then Link = "" fileName = "dc9b"
-	elseif legacySelect == "4" then Link = "" fileName = "dc11"
+local legacySelect = tonumber(io.read())
+	if legacySelect == 1 then Link = "" fileName = "dcli"
+	elseif legacySelect == 2 then Link = "" fileName = "dc8"
+	elseif legacySelect == 3 then Link = "" fileName = "dc9b"
+	elseif legacySelect == 4 then Link = "" fileName = "dc11"
 	else goto legacy
 	end
 goto selectLocation
@@ -113,7 +113,7 @@ goto selectLocation
 os.execute("cls")
 print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
-local DCPath = io.read()
+local DCPath = tostring(io.read())
 if DCPath == "" then DCPath = "/home/"
 end
-os.execute("wget", {"-f", Link, DCPath..fileName}) 
+--os.execute("wget", {"-f", Link, DCPath..fileName}) 
