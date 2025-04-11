@@ -6,6 +6,7 @@ local screen = component.screen
 
 --Update
 
+::main::
 print("Check for update? (y/n)")
 local updateVariable = io.read()
 if updateVariable == "y" then
