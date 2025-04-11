@@ -6,6 +6,7 @@ local screen = component.screen
 
 --Update
 
+--[[
 print("Check for update? (y/n)")
 local updateVariable = io.read()
 if updateVariable == "y" then
@@ -14,6 +15,7 @@ if updateVariable == "y" then
 	os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
 else goto main
 end
+]]--
 
 -- Branch Selector Screen (done)
 
@@ -109,10 +111,12 @@ goto selectLocation
 --Actually Installing The Damn Thing (done)
 
 ::selectLocation::
+--[[
 os.execute("cls")
 print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
 local DCPath = io.read()
 if DCPath == "" then DCPath = "/home/"
 end
-os.execute("wget", {"-f", Link, DCPath..fileName})
+os.execute("wget", {"-f", Link, DCPath..fileName}) 
+]]--
