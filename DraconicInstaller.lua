@@ -18,7 +18,7 @@ end
 -- Branch Selector Screen (done)
 
 ::main::
-os.execute(cls)
+os.execute("cls")
 print("Draconic Control Installer")
 print("Please select a version:")
 print("")
@@ -40,7 +40,7 @@ local pathSelect = io.read()
 --Stable versions (done except links)
 
 ::stable::
-os.execute(cls)
+os.execute("cls")
 print("Draconic Control Stable Releases")
 print("")
 print("1")
@@ -66,7 +66,7 @@ goto selectLocation
 --Canary versions (done except links)
 
 ::canary::
-os.execute(cls)
+os.execute("cls")
 print("Draconic Control Canary Releases")
 print("")
 print("1")
@@ -84,7 +84,7 @@ goto selectLocation
 --legacy versions (done except links)
 
 ::legacy::
-os.execute(cls)
+os.execute("cls")
 print("Draconic Control Legacy Releases")
 print("")
 print("DraCon [CLI]")
@@ -109,7 +109,7 @@ goto selectLocation
 --Actually Installing The Damn Thing (done)
 
 ::selectLocation::
-os.execute(cls)
+os.execute("cls")
 print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
 local DCPath = io.read()
