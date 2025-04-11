@@ -67,10 +67,16 @@ goto selectLocation
 
 ::canary::
 os.execute(cls)
+print("Draconic Control Canary Releases")
+print("")
+print("1")
 print("Draconic Control 15.2xSMT")
+print("")
+print("2")
+print("Draconic Control rSMT")
 local canarySelect = io.read()
 	if canarySelect == "1" then Link = "" fileName = "dc15t"
-	elseif canarySelect == "2" then Link = "" fileName = "TBD"
+	elseif canarySelect == "2" then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
 	else goto canary
 	end
 goto selectLocation
