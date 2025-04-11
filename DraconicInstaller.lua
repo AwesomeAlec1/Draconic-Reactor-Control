@@ -104,7 +104,8 @@ goto selectLocation
 
 ::selectLocation::
 os.execute(cls)
-print("Please specify a file directory")
+print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
 local DCPath = io.read()
+if DCPath == "" then DCPath = "/home/" end
 os.execute("wget", {"-f", Link, DCPath..fileName})
