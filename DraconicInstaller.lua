@@ -31,9 +31,9 @@ print("")
 print("legacy")
 print("[Legacy Branches]")
 local pathSelect = io.read()
-	if pathSelect == "stable" goto stable
-	elseif pathSelect == "canary" goto canary
-	elseif pathSelect == "legacy" goto legacy
+	if pathSelect == "stable" then goto stable
+	elseif pathSelect == "canary" then goto canary
+	elseif pathSelect == "legacy" then goto legacy
 	else goto main
 	end
 
@@ -110,7 +110,7 @@ goto selectLocation
 
 ::selectLocation::
 os.execute("cls")
---print({"Please specify a file directory for ", fileName})
+print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
 local DCPath = io.read()
 if DCPath == "" then DCPath = "/home/"
