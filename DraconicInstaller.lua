@@ -55,10 +55,10 @@ print("")
 print("4")
 print("Draconic Control 15.1e")
 local stableSelect = io.read()
-	if stableSelect == "1" then Link = "" fileName = "dc13"
-	elseif stableSelect == "2" then Link = "" fileName = "dc14e"
-	elseif stableSelect == "3" then Link = "" fileName = "dc14p"
-	elseif stableSelect == "4" then Link = "" fileName = "dc15e"
+	if stableSelect == "1" then Link = ""; fileName = "dc13"
+	elseif stableSelect == "2" then Link = ""; fileName = "dc14e"
+	elseif stableSelect == "3" then Link = ""; fileName = "dc14p"
+	elseif stableSelect == "4" then Link = ""; fileName = "dc15e"
 	else goto stable
 	end
 goto selectLocation
@@ -75,8 +75,8 @@ print("")
 print("2")
 print("Draconic Control rSMT")
 local canarySelect = io.read()
-	if canarySelect == "1" then Link = "" fileName = "dc15t"
-	elseif canarySelect == "2" then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
+	if canarySelect == "1" then Link = ""; fileName = "dc15t"
+	elseif canarySelect == "2" then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua"; fileName = "dcrSMT"
 	else goto canary
 	end
 goto selectLocation
@@ -98,10 +98,10 @@ print("")
 print("")
 print("Draconic Control 11.1")
 local legacySelect = io.read()
-	if legacySelect == "1" then Link = "" fileName = "dcli"
-	elseif legacySelect == "2" then Link = "" fileName = "dc8"
-	elseif legacySelect == "3" then Link = "" fileName = "dc9b"
-	elseif legacySelect == "4" then Link = "" fileName = "dc11"
+	if legacySelect == "1" then Link = ""; fileName = "dcli"
+	elseif legacySelect == "2" then Link = ""; fileName = "dc8"
+	elseif legacySelect == "3" then Link = ""; fileName = "dc9b"
+	elseif legacySelect == "4" then Link = ""; fileName = "dc11"
 	else goto legacy
 	end
 goto selectLocation
