@@ -1,8 +1,4 @@
-local component = require("component")
-local term = require("term")
 local unicode= require("unicode")
-local gpu = component.gpu
-local screen = component.screen
 
 --Update
 
