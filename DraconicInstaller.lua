@@ -115,4 +115,4 @@ print("Default: /home/")
 local DCPath = io.read()
 if DCPath == "" then DCPath = "/home/"
 end
-os.execute("wget", {"-f", Link, DCPath..fileName})
+--os.execute("wget", {"-f", Link, DCPath..fileName})
