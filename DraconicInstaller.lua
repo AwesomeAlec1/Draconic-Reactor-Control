@@ -7,14 +7,14 @@ screen = component.screen
 --Update
 print("Check for update? (y/n)")
 local updateVariable = io.read()
-if updateVariable == "y"
+if updateVariable == "y" then
 	local fileName = process.info().path
 	local installPath = shell.resolve(fileName)
-	os.execute(wget -f "link" installPath)
-	os.execute("wget", {"-f", "link", installPath})
+	os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
 else goto main
 end
 
+-- Branch Selector Screen (done)
 ::main::
 os.execute(cls)
 print("Draconic Control Installer")
@@ -35,7 +35,7 @@ local pathSelect = io.read()
 	else goto main
 	end
 
---Stable versions
+--Stable versions (done - links)
 ::stable::
 os.execute(cls)
 print("Draconic Control Stable Releases")
@@ -44,27 +44,36 @@ print("1"
 print("Draconic Control 13.0")
 print("")
 print("2")
-print("Draconic Control 14.0sMAT")
+print("Draconic Control 14.0e")
 print("")
 print("3")
-print("Draconic Control 14.0xPID")
+print("Draconic Control 14.0p")
 print("")
 print("4")
-print("Draconic Control 15.1sMAT")
+print("Draconic Control 15.1e")
 local stableSelect = io.read()
-	if stableSelect == "1" Link == ""
-	elseif stableSelect == "2" Link == ""
-	elseif stableSelect == "3" Link == ""
-	elseif stableSelect == "4" Link == ""
+	if stableSelect == "1" then Link = "" fileName = "dc13"
+	elseif stableSelect == "2" then Link = "" fileName = "dc14e"
+	elseif stableSelect == "3" then Link = "" fileName = "dc14p"
+	elseif stableSelect == "4" then Link = "" fileName = "dc15e"
 	else goto stable
 	end
+goto selectLocation
 
 --Canary versions
-
+::canary::
+os.execute(cls)
 print("Draconic Control 15.2xSMT")
+local canarySelect = io.read()
+	if canarySelect == "1" then Link = "" fileName = "dc15t"
+	elseif canarySelect == "2" then Link = "" fileName = "TBD"
+	else goto canary
+	end
+goto selectLocation
 
---legacy versions
-
+--legacy versions (done - links)
+::legacy::
+os.execute(cls)
 print("Draconic Control Legacy Releases")
 print("")
 print("DraCon [CLI]")
@@ -78,14 +87,18 @@ print("")
 print("")
 print("Draconic Control 11.1")
 local legacySelect = io.read()
-	if legacySelect == "1" Link == ""
-	elseif legacySelect == "2" Link == ""
-	elseif legacySelect == "3" Link == ""
-	elseif legacySelect == "4" Link == ""
-	else goto stable
+	if legacySelect == "1" then Link = "" fileName = "dcli"
+	elseif legacySelect == "2" then Link = "" fileName = "dc8"
+	elseif legacySelect == "3" then Link = "" fileName = "dc9b"
+	elseif legacySelect == "4" then Link = "" fileName = "dc11"
+	else goto legacy
 	end
+goto selectLocation
 
-os.execute("wget", {"-f", Link, "/home/filename"})
-shell.resolve(process.info().path)
-
-local userInput = io.read()
+--Actually Installing The Damn Thing
+::selectLocation::
+os.execute(cls)
+print("Please specify a file directory")
+print("Default: /home/")
+local DCPath = io.read()
+os.execute("wget", {"-f", Link, DCPath..fileName})
