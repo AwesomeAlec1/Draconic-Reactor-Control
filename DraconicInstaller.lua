@@ -11,7 +11,7 @@ local updateVariable = io.read()
 if updateVariable == "y" then
 	local fileName = process.info().path
 	local installPath = shell.resolve(fileName)
-	--os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
+	os.execute("wget", {"-f", "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua", installPath})
 else goto main
 end
 
@@ -110,9 +110,9 @@ goto selectLocation
 
 ::selectLocation::
 os.execute("cls")
-print({"Please specify a file directory for ", fileName})
+--print({"Please specify a file directory for ", fileName})
 print("Default: /home/")
 local DCPath = io.read()
 if DCPath == "" then DCPath = "/home/"
 end
---os.execute("wget", {"-f", Link, DCPath..fileName})
+os.execute("wget", {"-f", Link, DCPath..fileName})
