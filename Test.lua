@@ -7,7 +7,7 @@ local unicode = require("unicode")
 local shell = require("shell")
 local gpu = component.gpu
 local screen = component.screen
-
+ 
 --Update
 print("Check for update? (y/n)")
 local updateVariable = tostring(io.read())
