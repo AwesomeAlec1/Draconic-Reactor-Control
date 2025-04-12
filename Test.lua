@@ -1,5 +1,6 @@
 --Requirements
 
+local process = require("process")
 local component = require("component")
 local term = require("term")
 local unicode= require("unicode")
