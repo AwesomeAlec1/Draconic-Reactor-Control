@@ -7,7 +7,7 @@ local unicode = require("unicode")
 local shell = require("shell")
 local gpu = component.gpu
 local screen = component.screen
- 
+
 --Update
 print("Check for update? (y/n)")
 local updateVariable = tostring(io.read())
@@ -15,6 +15,7 @@ if updateVariable == "y" then
 	local installPath = shell.resolve(process.info().path)
 	os.execute("wget -f \"https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/Test.lua\" " .. installPath)
 	os.execute(installPath)
+	os.exit()
 end
 
 local function locateAndInstall(link, fileName)
