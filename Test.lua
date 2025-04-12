@@ -13,7 +13,7 @@ print("Check for update? (y/n)")
 local updateVariable = tostring(io.read())
 if updateVariable == "y" then
 	local installPath = shell.resolve(process.info().path)
-	os.execute("wget -f \"https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua\" " .. installPath)
+	os.execute("wget -f \"https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/Test.lua\" " .. installPath)
 	print("Update finished, please relaunch.")
 	os.exit(0)
 end
