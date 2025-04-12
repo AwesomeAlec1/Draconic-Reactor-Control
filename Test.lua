@@ -15,7 +15,8 @@ if updateVariable == "y" then
 	local installPath = shell.resolve(process.info().path)
 	os.execute("wget -f \"https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicInstaller.lua\" " .. installPath)
 	os.sleep(1)
-	os.execute(\"installPath\")
+	os.execute("cls")
+	os.execute(installPath)
 end
 
 local function locateAndInstall(link, fileName)
