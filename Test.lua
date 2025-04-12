@@ -3,7 +3,8 @@
 local process = require("process")
 local component = require("component")
 local term = require("term")
-local unicode= require("unicode")
+local unicode = require("unicode")
+local shell = require("shell")
 local gpu = component.gpu
 local screen = component.screen
 
