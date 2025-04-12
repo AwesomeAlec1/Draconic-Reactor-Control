@@ -24,9 +24,7 @@ if updateVariable == "y" then
 else goto main
 end
 
-local function locateAndInstall()
-::selectLocation::
- 
+local function locateAndInstall() 
  os.execute("cls")
  print({"Please specify a file directory for ", fileName})
  print("Default: /home/")
@@ -36,10 +34,11 @@ local function locateAndInstall()
   DCPath = "/home/"
  end
  os.execute("wget", {"-f", Link, DCPath..fileName})
+ print({"Successfully Installed to ", DCPath..fileName})
+ os.exit()
 end
 
 local function legacy()
-::legacy::
  os.execute("cls")
  print("Draconic Control Legacy Releases")
  print("")
@@ -58,10 +57,10 @@ local function legacy()
   elseif legacySelect == 2 then Link = "" fileName = "dc8"
   elseif legacySelect == 3 then Link = "" fileName = "dc9b"
   elseif legacySelect == 4 then Link = "" fileName = "dc11"
-  else goto legacy
   end
  locateAndInstall()
 end
+legacy()
 
 local function canary()
 ::canary::
@@ -76,13 +75,12 @@ local function canary()
  local canarySelect = tonumber(io.read())
   if canarySelect == 1 then Link = "" fileName = "dc15t"
   elseif canarySelect == 2 then Link = "https://raw.githubusercontent.com/AwesomeAlec1/Draconic-Reactor-Control/refs/heads/Installer/DraconicReactorControl.lua" fileName = "dcrSMT"
-  else goto canary
   end
  locateAndInstall()
 end
+canary()
 
 local function stable()
-::stable::
  os.execute("cls")
  print("Draconic Control Stable Releases")
  print("")
@@ -102,14 +100,13 @@ local function stable()
   elseif stableSelect == 2 then Link = "" fileName = "dc14e"
   elseif stableSelect == 3 then Link = "" fileName = "dc14p"
   elseif stableSelect == 4 then Link = "" fileName = "dc15e"
-  else goto stable
   end
  locateAndInstall()
 end
+stable()
 
 -- Branch Selector Screen (done)
 
-::main::
 os.execute("cls")
 print("Draconic Control Installer")
 print("Please select a version:")
@@ -126,5 +123,4 @@ local pathSelect = tostring(io.read())
  if pathSelect == "stable" then stable()
  elseif pathSelect == "canary" then canary()
  elseif pathSelect == "legacy" then legacy()
- else goto main
  end
